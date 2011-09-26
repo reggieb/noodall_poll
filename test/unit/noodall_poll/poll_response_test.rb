@@ -2,9 +2,14 @@ require 'test_helper'
 
 module NoodallPoll
   class PollResponseTest < ActiveSupport::TestCase
-    def test_creation_of_poll_response
-      poll_response = PollResponse.create
-      assert(poll_response.created_at)
+    def setup
+      @poll_response = Factory(:poll_response)
+      @response_option = Factory(:response_option)
+    end
+
+    def test_join_to_poll_response
+      @response_option.poll_responses << @poll_response
+      assert_equal(@response_option, @poll_response.response_option)
     end
   end
 end
