@@ -1,5 +1,5 @@
 module NoodallPoll
-  class PollResponse
+  class ResponseOption
     include MongoMapper::Document
 
     timestamps!

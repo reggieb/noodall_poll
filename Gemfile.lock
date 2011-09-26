@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     noodall_poll (0.0.1)
+      bson_ext
       mongo_mapper
       rails (~> 3.1.0)
 
@@ -40,8 +41,15 @@ GEM
     arel (2.2.1)
     bcrypt-ruby (3.0.1)
     bson (1.4.0)
+    bson_ext (1.4.0)
     builder (3.0.0)
     erubis (2.7.0)
+    factory_girl (2.1.2)
+      activesupport
+    factory_girl_rails (1.2.0)
+      factory_girl (~> 2.1.0)
+      railties (>= 3.0.0)
+    faker (0.3.1)
     hike (1.2.1)
     i18n (0.6.0)
     mail (2.3.0)
@@ -101,5 +109,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  factory_girl_rails
+  faker (~> 0.3.1)
   noodall_poll!
   sqlite3
