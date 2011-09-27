@@ -1,0 +1,68 @@
+Noodall::Node Defined slot: main
+Noodall::Node Defined slot: wide
+Noodall::Node Defined slot: small
+Failed to load noodall site map: No such file or directory - /home/robn/web/noodall-poll/noodall_poll/test/dummy/config/sitemap.yml
+                      noodall_poll        /noodall_poll                                     {:to=>NoodallPoll::Engine}
+                              root        /                                                 {:controller=>"noodall/nodes", :action=>"show"}
+          noodall_admin_node_nodes GET    /admin/nodes/:node_id/nodes(.:format)             {:action=>"index", :controller=>"noodall/admin/nodes"}
+                                   POST   /admin/nodes/:node_id/nodes(.:format)             {:action=>"create", :controller=>"noodall/admin/nodes"}
+       new_noodall_admin_node_node GET    /admin/nodes/:node_id/nodes/new(.:format)         {:action=>"new", :controller=>"noodall/admin/nodes"}
+      edit_noodall_admin_node_node GET    /admin/nodes/:node_id/nodes/:id/edit(.:format)    {:action=>"edit", :controller=>"noodall/admin/nodes"}
+           noodall_admin_node_node GET    /admin/nodes/:node_id/nodes/:id(.:format)         {:action=>"show", :controller=>"noodall/admin/nodes"}
+                                   PUT    /admin/nodes/:node_id/nodes/:id(.:format)         {:action=>"update", :controller=>"noodall/admin/nodes"}
+                                   DELETE /admin/nodes/:node_id/nodes/:id(.:format)         {:action=>"destroy", :controller=>"noodall/admin/nodes"}
+       noodall_admin_node_versions GET    /admin/nodes/:node_id/versions(.:format)          {:action=>"index", :controller=>"noodall/admin/versions"}
+                                   POST   /admin/nodes/:node_id/versions(.:format)          {:action=>"create", :controller=>"noodall/admin/versions"}
+    new_noodall_admin_node_version GET    /admin/nodes/:node_id/versions/new(.:format)      {:action=>"new", :controller=>"noodall/admin/versions"}
+   edit_noodall_admin_node_version GET    /admin/nodes/:node_id/versions/:id/edit(.:format) {:action=>"edit", :controller=>"noodall/admin/versions"}
+        noodall_admin_node_version GET    /admin/nodes/:node_id/versions/:id(.:format)      {:action=>"show", :controller=>"noodall/admin/versions"}
+                                   PUT    /admin/nodes/:node_id/versions/:id(.:format)      {:action=>"update", :controller=>"noodall/admin/versions"}
+                                   DELETE /admin/nodes/:node_id/versions/:id(.:format)      {:action=>"destroy", :controller=>"noodall/admin/versions"}
+change_template_noodall_admin_node GET    /admin/nodes/:id/change_template(.:format)        {:action=>"change_template", :controller=>"noodall/admin/nodes"}
+        move_up_noodall_admin_node GET    /admin/nodes/:id/move_up(.:format)                {:action=>"move_up", :controller=>"noodall/admin/nodes"}
+      move_down_noodall_admin_node GET    /admin/nodes/:id/move_down(.:format)              {:action=>"move_down", :controller=>"noodall/admin/nodes"}
+        preview_noodall_admin_node POST   /admin/nodes/:id/preview(.:format)                {:action=>"preview", :controller=>"noodall/admin/nodes"}
+          tree_noodall_admin_nodes GET    /admin/nodes/tree(.:format)                       {:action=>"tree", :controller=>"noodall/admin/nodes"}
+        filter_noodall_admin_nodes POST   /admin/nodes/filter(.:format)                     {:action=>"filter", :controller=>"noodall/admin/nodes"}
+               noodall_admin_nodes GET    /admin/nodes(.:format)                            {:action=>"index", :controller=>"noodall/admin/nodes"}
+                                   POST   /admin/nodes(.:format)                            {:action=>"create", :controller=>"noodall/admin/nodes"}
+            new_noodall_admin_node GET    /admin/nodes/new(.:format)                        {:action=>"new", :controller=>"noodall/admin/nodes"}
+           edit_noodall_admin_node GET    /admin/nodes/:id/edit(.:format)                   {:action=>"edit", :controller=>"noodall/admin/nodes"}
+                noodall_admin_node GET    /admin/nodes/:id(.:format)                        {:action=>"show", :controller=>"noodall/admin/nodes"}
+                                   PUT    /admin/nodes/:id(.:format)                        {:action=>"update", :controller=>"noodall/admin/nodes"}
+                                   DELETE /admin/nodes/:id(.:format)                        {:action=>"destroy", :controller=>"noodall/admin/nodes"}
+       images_noodall_admin_assets GET    /admin/assets/images(.:format)                    {:action=>"images", :controller=>"noodall/admin/assets"}
+       videos_noodall_admin_assets GET    /admin/assets/videos(.:format)                    {:action=>"videos", :controller=>"noodall/admin/assets"}
+    documents_noodall_admin_assets GET    /admin/assets/documents(.:format)                 {:action=>"documents", :controller=>"noodall/admin/assets"}
+     plupload_noodall_admin_assets POST   /admin/assets/plupload(.:format)                  {:action=>"plupload", :controller=>"noodall/admin/assets"}
+      pending_noodall_admin_assets GET    /admin/assets/pending(.:format)                   {:action=>"pending", :controller=>"noodall/admin/assets"}
+         tags_noodall_admin_assets GET    /admin/assets/tags(.:format)                      {:action=>"tags", :controller=>"noodall/admin/assets"}
+           add_noodall_admin_asset GET    /admin/assets/:id/add(.:format)                   {:action=>"add", :controller=>"noodall/admin/assets"}
+              noodall_admin_assets GET    /admin/assets(.:format)                           {:action=>"index", :controller=>"noodall/admin/assets"}
+                                   POST   /admin/assets(.:format)                           {:action=>"create", :controller=>"noodall/admin/assets"}
+           new_noodall_admin_asset GET    /admin/assets/new(.:format)                       {:action=>"new", :controller=>"noodall/admin/assets"}
+          edit_noodall_admin_asset GET    /admin/assets/:id/edit(.:format)                  {:action=>"edit", :controller=>"noodall/admin/assets"}
+               noodall_admin_asset GET    /admin/assets/:id(.:format)                       {:action=>"show", :controller=>"noodall/admin/assets"}
+                                   PUT    /admin/assets/:id(.:format)                       {:action=>"update", :controller=>"noodall/admin/assets"}
+                                   DELETE /admin/assets/:id(.:format)                       {:action=>"destroy", :controller=>"noodall/admin/assets"}
+          noodall_admin_asset_tags        /admin/assets/:asset_type/tags(.:format)          {:controller=>"noodall/admin/assets", :action=>"tags"}
+                     noodall_admin        /admin/components/form/:type(.:format)            {:controller=>"noodall/admin/components", :action=>"form"}
+              noodall_admin_groups GET    /admin/groups(.:format)                           {:action=>"index", :controller=>"noodall/admin/groups"}
+                                   POST   /admin/groups(.:format)                           {:action=>"create", :controller=>"noodall/admin/groups"}
+           new_noodall_admin_group GET    /admin/groups/new(.:format)                       {:action=>"new", :controller=>"noodall/admin/groups"}
+          edit_noodall_admin_group GET    /admin/groups/:id/edit(.:format)                  {:action=>"edit", :controller=>"noodall/admin/groups"}
+               noodall_admin_group GET    /admin/groups/:id(.:format)                       {:action=>"show", :controller=>"noodall/admin/groups"}
+                                   PUT    /admin/groups/:id(.:format)                       {:action=>"update", :controller=>"noodall/admin/groups"}
+                                   DELETE /admin/groups/:id(.:format)                       {:action=>"destroy", :controller=>"noodall/admin/groups"}
+            noodall_admin_keywords GET    /admin/keywords(.:format)                         {:action=>"index", :controller=>"noodall/admin/keywords"}
+                                   POST   /admin/keywords(.:format)                         {:action=>"create", :controller=>"noodall/admin/keywords"}
+         new_noodall_admin_keyword GET    /admin/keywords/new(.:format)                     {:action=>"new", :controller=>"noodall/admin/keywords"}
+        edit_noodall_admin_keyword GET    /admin/keywords/:id/edit(.:format)                {:action=>"edit", :controller=>"noodall/admin/keywords"}
+             noodall_admin_keyword GET    /admin/keywords/:id(.:format)                     {:action=>"show", :controller=>"noodall/admin/keywords"}
+                                   PUT    /admin/keywords/:id(.:format)                     {:action=>"update", :controller=>"noodall/admin/keywords"}
+                                   DELETE /admin/keywords/:id(.:format)                     {:action=>"destroy", :controller=>"noodall/admin/keywords"}
+                   noodall_version GET    /v/:node_id/:id(.:format)                         {:controller=>"noodall/nodes", :action=>"version"}
+                    noodall_search GET    /search(.:format)                                 {:action=>"search", :controller=>"noodall/nodes"}
+                   noodall_sitemap GET    /sitemap(.:format)                                {:action=>"sitemap", :controller=>"noodall/nodes"}
+                                   GET    /*permalink.:format                               {:controller=>"noodall/nodes", :action=>"show"}
+                    node_permalink GET    /*permalink(.:format)                             {:controller=>"noodall/nodes", :action=>"show"}

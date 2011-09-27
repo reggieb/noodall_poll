@@ -15,6 +15,10 @@ def require_files_in_subdirectories(*directories)
   end
 end
 
+  def get(action, options = {}, *args)
+
+  end
+
 require_files_in_subdirectories('support', 'factories')
 
 class ActiveSupport::TestCase
@@ -28,5 +32,11 @@ class ActiveSupport::TestCase
       coll.remove
     end
   end
+
+  def noodle_poll_get(action, parameters = {}, session = nil, flash = nil)
+    parameters.merge!(:use_route => :noodall_poll)
+    get(action, parameters, session, flash)
+  end
+
 end
 

@@ -56,18 +56,18 @@ module NoodallPoll
         :question => 'What is you favourite animal',
         :response_options => [
           {:position => 0, :text => 'dog'},
+          {:position => 2, :text => 'mouse'},
           {:position => 1, :text => 'cat'},
-          {:position => 2, :text => 'mouse'}
+          {:position => 3, :text => 'monkey'}
         ]
       }
       starting_number_of_polls = Poll.all.count
       starting_number_of_response_options = ResponseOption.all.count
-      Poll.create(params)
-      poll = Poll.all.last
+      poll = Poll.create(params)
       assert_equal(starting_number_of_polls + 1, Poll.all.count, "One poll should be added to the database")
-      assert_equal(starting_number_of_response_options + 3, ResponseOption.all.count, "Three response options should be added to database")
+      assert_equal(starting_number_of_response_options + 4, ResponseOption.all.count, "Three response options should be added to database")
       assert_equal(name, poll.name, "The most recent poll should have the name #{name}")
-      assert_equal(%w{dog cat mouse}, poll.response_options.collect{|o| o.text}, 'The three response options should be associated with the poll.')
+      assert_equal(%w{dog cat mouse monkey}, poll.response_options.collect{|o| o.text}, 'The three response options should be associated with the poll and in position order.')
     end
 
     private

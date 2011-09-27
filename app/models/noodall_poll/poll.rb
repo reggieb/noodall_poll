@@ -7,7 +7,7 @@ module NoodallPoll
     key :thank_you_message, String
     timestamps!
 
-    many :response_options, :class => NoodallPoll::ResponseOption
+    many :response_options, :class => NoodallPoll::ResponseOption, :order => 'position'
 
     validates_presence_of(:name, :question)
 
