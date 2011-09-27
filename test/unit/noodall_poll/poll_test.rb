@@ -49,6 +49,27 @@ module NoodallPoll
       assert_equal(results, @poll.result, 'Resultant hash should have reponse option text as keys and their results as values')
     end
 
+    def test_creation_of_poll_with_response_options
+      name =  'test poll'
+      params = {
+        :name => name,
+        :question => 'What is you favourite animal',
+        :response_options => [
+          {:position => 0, :text => 'dog'},
+          {:position => 1, :text => 'cat'},
+          {:position => 2, :text => 'mouse'}
+        ]
+      }
+      starting_number_of_polls = Poll.all.count
+      starting_number_of_response_options = ResponseOption.all.count
+      Poll.create(params)
+      poll = Poll.all.last
+      assert_equal(starting_number_of_polls + 1, Poll.all.count, "One poll should be added to the database")
+      assert_equal(starting_number_of_response_options + 3, ResponseOption.all.count, "Three response options should be added to database")
+      assert_equal(name, poll.name, "The most recent poll should have the name #{name}")
+      assert_equal(%w{dog cat mouse}, poll.response_options.collect{|o| o.text}, 'The three response options should be associated with the poll.')
+    end
+
     private
     def add_three_poll_responses_to_response_option
       (1..3).to_a.each{|n| @response_option.poll_responses << PollResponse.create}

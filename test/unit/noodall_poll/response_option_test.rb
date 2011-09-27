@@ -27,11 +27,24 @@ module NoodallPoll
     end
 
     def test_results
-      assert_equal(0, @response_option.result)
+      assert_response_option_result_zero('at start of test')
       test_join_to_poll_response
       assert_equal(1, @response_option.result)
       @response_option.poll_responses << PollResponse.create
       assert_equal(2, @response_option.result)
+    end
+
+    def test_add_poll_response
+      starting_number_of_poll_responses = PollResponse.all.count
+      assert_response_option_result_zero('at start of test')
+      @response_option.register_poll_response
+      assert_equal(starting_number_of_poll_responses + 1, PollResponse.all.count, "Poll response should be added to databasse")
+      assert_equal(1, @response_option.result, "Response option result should now be one")
+    end
+
+    private
+    def assert_response_option_result_zero(message = nil)
+      assert_equal(0, @response_option.result, "Response option result should be zero#{ ' ' + message if message}.")
     end
   end
 end

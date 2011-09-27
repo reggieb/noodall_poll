@@ -16,3 +16,17 @@ def require_files_in_subdirectories(*directories)
 end
 
 require_files_in_subdirectories('support', 'factories')
+
+class ActiveSupport::TestCase
+
+  def teardown
+    drop_all_mongo_test_data
+  end
+
+  def drop_all_mongo_test_data
+    MongoMapper.database.collections.each do |coll|
+      coll.remove
+    end
+  end
+end
+
