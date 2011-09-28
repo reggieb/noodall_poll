@@ -1,6 +1,9 @@
 module NoodallPoll
   module Admin
     class PollsController < ApplicationController
+
+      layout 'noodall_admin'
+
       def index
         @polls = Poll.all
 
