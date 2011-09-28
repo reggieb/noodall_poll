@@ -32,6 +32,12 @@ module NoodallPoll
         get_poll
       end
 
+      def destroy
+        get_poll
+        @poll.destroy
+        redirect_to(admin_polls_url)
+      end
+
       private
       def get_poll
         @poll = Poll.find(params[:id])

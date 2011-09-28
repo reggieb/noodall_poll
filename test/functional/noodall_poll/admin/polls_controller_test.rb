@@ -76,6 +76,12 @@ module NoodallPoll
         assert_select('h1', :text => @poll.name)
       end
 
+      def test_destroy
+        noodall_poll_post :destroy, :id => @poll
+        assert_poll_deleted_from_database
+        assert_response :redirect
+      end
+
 
       private
       def remove_polls_created_in_setup
@@ -112,6 +118,10 @@ module NoodallPoll
 
       def assert_poll_not_added_to_database
         assert_equal(@starting_number_of_polls, Poll.count, "A poll should be added to the database")
+      end
+
+      def assert_poll_deleted_from_database
+        assert_equal(@starting_number_of_polls - 1, Poll.count, "A poll should be deleted from the database")
       end
 
       def assert_errors_detected_on(object)
