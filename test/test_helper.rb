@@ -15,10 +15,6 @@ def require_files_in_subdirectories(*directories)
   end
 end
 
-  def get(action, options = {}, *args)
-
-  end
-
 require_files_in_subdirectories('support', 'factories')
 
 class ActiveSupport::TestCase

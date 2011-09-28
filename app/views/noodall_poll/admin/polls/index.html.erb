@@ -1,0 +1,24 @@
+<h1>Manage Polls</h1>
+
+<% unless @polls.blank? %>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Question</th>
+    <th>Button Label</th>
+    <th>Thank you message</th>
+  </tr>
+<%   for poll in @polls %>
+  <tr>
+    <td><%= poll.name -%></td>
+    <td><%= poll.question -%></td>
+    <td><%= poll.button_label -%></td>
+    <td><%= poll.thank_you_message -%></td>
+  </tr>
+<%   end %>
+</table>
+<% else %>
+<h2>No polls found</h2>
+<p>There are no polls</p>
+<% end %>
+
