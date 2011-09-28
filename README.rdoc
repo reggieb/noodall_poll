@@ -2,8 +2,7 @@
 
 Adding this engine to a Noodall site will add the following functionality:
 
-* A administrator will be able to create user polls that they will then
-be able to position within pages.
+* A administrator will be able to create user polls that they will then be able to position within pages.
 * Users will be able to select and submit a poll option.
 * Once a user has submitted their poll option they will be able to see the poll results.
 
