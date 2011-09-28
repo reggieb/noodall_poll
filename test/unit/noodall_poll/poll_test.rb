@@ -16,6 +16,11 @@ module NoodallPoll
       end
     end
 
+    def test_name_cannot_be_blank
+      @poll.name = ""
+      assert(@poll.invalid?, "Poll should be invalid if name is blank")
+    end
+
     def test_button_label_default
       @poll.button_label = nil
       assert_equal('Submit', @poll.button_label, "The button label should return 'Submit' if set as nil.")

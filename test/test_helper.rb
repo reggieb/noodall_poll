@@ -29,9 +29,18 @@ class ActiveSupport::TestCase
     end
   end
 
-  def noodle_poll_get(action, parameters = {}, session = nil, flash = nil)
+  def noodall_poll_get(action, parameters = {}, *args)
+    noodall_poll_request(:get, action, parameters, *args)
+  end
+
+  def noodall_poll_post(action, parameters = {}, *args)
+    noodall_poll_request(:post, action, parameters, *args)
+  end
+
+  private
+  def noodall_poll_request(type, action, parameters, *args)
     parameters.merge!(:use_route => :noodall_poll)
-    get(action, parameters, session, flash)
+    send(type, action, parameters, *args)
   end
 
 end

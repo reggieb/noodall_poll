@@ -1,5 +1,7 @@
 <h1>Manage Polls</h1>
 
+<%= link_to('Create new poll', new_admin_poll_url) %>
+
 <% unless @polls.blank? %>
 <table>
   <tr>
