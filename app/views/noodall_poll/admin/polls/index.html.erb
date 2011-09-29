@@ -7,16 +7,14 @@
   <tr>
     <th>Name</th>
     <th>Question</th>
-    <th>Button Label</th>
-    <th>Thank you message</th>
-    <th>Actions</th>
+    <th>Response options</th>
+    <th colspan="3">Actions</th>
   </tr>
 <%   for poll in @polls %>
   <tr>
-    <td><%= poll.name -%></td>
-    <td><%= poll.question -%></td>
-    <td><%= poll.button_label -%></td>
-    <td><%= poll.thank_you_message -%></td>
+    <td><%= poll.name %></td>
+    <td><%= poll.question %></td>
+    <td><%= poll.response_options ? poll.response_options.length : 0 %></td>
     <td><%= link_to('Show', admin_poll_path(poll)) %></td>
     <td><%= link_to('Edit', edit_admin_poll_path(poll)) %></td>
     <td><%= link_to('Delete', admin_poll_path(poll), :confirm => 'Are you sure?', :method => :delete) %></td>

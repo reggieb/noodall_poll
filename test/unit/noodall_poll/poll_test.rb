@@ -75,6 +75,27 @@ module NoodallPoll
       assert_equal(%w{dog cat mouse monkey}, poll.response_options.collect{|o| o.text}, 'The three response options should be associated with the poll and in position order.')
     end
 
+    def test_update_attribute_with_response_options
+      name =  'test poll'
+      params = {
+        :name => name,
+        :question => 'What is you favourite animal',
+        :response_options => [
+          {:position => 0, :text => 'dog'},
+          {:position => 2, :text => 'mouse'},
+          {:position => 1, :text => 'cat'},
+          {:position => 3, :text => 'monkey'}
+        ]
+      }
+      starting_number_of_polls = Poll.all.count
+      starting_number_of_response_options = ResponseOption.all.count
+      @poll.update_attributes(params)
+      assert_equal(starting_number_of_polls, Poll.all.count, "No polls should be added to the database")
+      assert_equal(starting_number_of_response_options + 4, ResponseOption.all.count, "Three response options should be added to database")
+      assert_equal(name, @poll.name, "The poll should have the name #{name}")
+      assert_equal(%w{dog cat mouse monkey}, @poll.response_options.collect{|o| o.text}, 'The three response options should be associated with the poll and in position order.')
+    end
+
     private
     def add_three_poll_responses_to_response_option
       (1..3).to_a.each{|n| @response_option.poll_responses << PollResponse.create}

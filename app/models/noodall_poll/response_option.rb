@@ -2,7 +2,7 @@ module NoodallPoll
   class ResponseOption
     include MongoMapper::Document
     key :text, String
-    key :postion, Integer
+    key :position, Integer
     timestamps!
 
     many :poll_responses, :class => NoodallPoll::PollResponse

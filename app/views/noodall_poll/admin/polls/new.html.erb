@@ -1,25 +1,26 @@
-<%= form_for([:admin, @poll]) do |f| %>
+<%= form_for([:admin, @poll]) do |poll_form| %>
 <p>
-  <%= f.label(:name) %><br />
-  <%= f.text_field(:name) %>
+  <%= poll_form.label(:name) %><br />
+  <%= poll_form.text_field(:name) %>
 </p>
 
 <p>
-  <%= f.label(:question, "The poll question (e.g. 'What is your favourite colour?')") %><br />
-  <%= f.text_area(:question, :rows => 4) %>
+  <%= poll_form.label(:question, "The poll question (e.g. 'What is your favourite colour?')") %><br />
+  <%= poll_form.text_area(:question, :rows => 4) %>
 </p>
 
 <p>
-  <%= f.label(:button_label) %><br />
-  <%= f.text_field(:button_label, :value => @poll.button_label) %>
+  <%= poll_form.label(:button_label) %><br />
+  <%= poll_form.text_field(:button_label, :value => @poll.button_label) %>
 </p>
 
 <p>
-  <%= f.label(:thank_you_message) %><br />
-  <%= f.text_area(:thank_you_message, :rows => 4, :value => @poll.thank_you_message) %>
+  <%= poll_form.label(:thank_you_message) %><br />
+  <%= poll_form.text_area(:thank_you_message, :rows => 4, :value => @poll.thank_you_message) %>
 </p>
-
+<%= render :partial => 'new_response_option_form' if @poll.new?  %>
+<%= fields_for_existing_reponse_options(@poll.response_options) %>
 <p>
-  <%= f.submit %>
+  <%= poll_form.submit %>
 </p>
 <% end %>

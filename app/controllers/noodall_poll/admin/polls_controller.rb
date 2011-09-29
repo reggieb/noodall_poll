@@ -14,7 +14,7 @@ module NoodallPoll
       end
 
       def create
-        @poll = Poll.new
+        new
         update_poll
       end
 
@@ -35,7 +35,7 @@ module NoodallPoll
       def destroy
         get_poll
         @poll.destroy
-        redirect_to(admin_polls_url)
+        redirect_to admin_polls_url
       end
 
       private
@@ -44,12 +44,29 @@ module NoodallPoll
       end
 
       def update_poll
-        @poll.attributes = params[:poll]
+
+        @poll.attributes = processed_poll_params
         if @poll.save
-          redirect_to admin_poll_url(@poll)
+          redirect_to edit_admin_poll_path(@poll)
         else
           render :action => "new"
         end
+      end
+
+      def processed_poll_params
+        if params[:response_options]
+          add_ids_to_response_options_param_values
+          params[:poll][:response_options] = params[:response_options].values
+        end
+        params[:poll]
+      end
+
+      def add_ids_to_response_options_param_values
+        params[:response_options].each{|id, values| values[:id] = id if mongo_id_pattern =~ id}
+      end
+
+      def mongo_id_pattern
+        /[0-9a-f]{20}/
       end
 
     end

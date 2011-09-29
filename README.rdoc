@@ -6,5 +6,5 @@ Adding this engine to a Noodall site will add the following functionality:
 * Users will be able to select and submit a poll option.
 * Once a user has submitted their poll option they will be able to see the poll results.
 
-- License
+= License
 This project uses MIT-LICENSE.
