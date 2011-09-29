@@ -6,7 +6,9 @@ module NoodallPoll
 
       def setup
         @poll = Factory(:poll)
+        @response_option = Factory(:response_option)
         @starting_number_of_polls = Poll.count
+        @starting_number_of_response_options = ResponseOption.count
       end
 
       def test_index
@@ -33,16 +35,26 @@ module NoodallPoll
       end
 
       def test_create
-        noodall_poll_post :create, :poll => poll_params
+        noodall_poll_post(
+          :create,
+          :poll => poll_params,
+          :response_options => new_response_option_params
+        )
         assert_poll_added_to_database
+        assert_response_option_added_to_database
         assert_response :redirect
       end
 
       def test_failure_to_create
-        noodall_poll_post :create, :poll => poll_params.merge(:name => nil)
+        noodall_poll_post(
+          :create,
+          :poll => poll_params.merge(:name => nil),
+          :response_options => new_response_option_params
+        )
         assert_poll_not_added_to_database
+        assert_response_option_not_added_to_database
         assert_response :success
-        assert_errors_detected_on(:poll)
+        assert_errors_detected_on(assigns(:poll))
       end
 
       def test_edit
@@ -65,7 +77,7 @@ module NoodallPoll
         noodall_poll_post :update, :id => @poll, :poll => @poll.attributes.merge(:name => "")
         assert_response :success
         assert_poll_passed_to_template
-        assert_errors_detected_on(:poll)
+        assert_errors_detected_on(assigns(:poll))
         assert_poll_not_added_to_database
       end
 
@@ -108,24 +120,14 @@ module NoodallPoll
           :name => Faker::Lorem.sentence,
           :question => Faker::Lorem.paragraph,
           :button_label => Faker::Lorem.sentence,
-          :thank_you_message => Faker::Lorem.paragraph
+          :thank_you_message => Faker::Lorem.paragraph,
         }
       end
 
-      def assert_poll_added_to_database
-        assert_equal(@starting_number_of_polls + 1, Poll.count, "A poll should be added to the database")
-      end
-
-      def assert_poll_not_added_to_database
-        assert_equal(@starting_number_of_polls, Poll.count, "A poll should be added to the database")
-      end
-
-      def assert_poll_deleted_from_database
-        assert_equal(@starting_number_of_polls - 1, Poll.count, "A poll should be deleted from the database")
-      end
-
-      def assert_errors_detected_on(object)
-        assert(!assigns(object).errors.empty?, "Errors should be detected on #{assigns(object).inspect}")
+      def new_response_option_params
+        {
+          ResponseOption.new.id => {:text => Faker::Lorem.sentence}
+        }
       end
 
       def assert_poll_passed_to_template

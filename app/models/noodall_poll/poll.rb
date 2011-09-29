@@ -11,6 +11,8 @@ module NoodallPoll
 
     validates_presence_of(:name, :question)
 
+    validate :delete_response_options_if_new_and_problem
+
     def button_label
       super.blank? ? 'Submit' : super
     end
@@ -23,6 +25,16 @@ module NoodallPoll
       result = Hash.new
       response_options.each{|o| result[o.text] = o.result}
       return result
+    end
+
+    # I can't find a better way of doing this
+    # Without it, if you create a poll together with response options
+    # and the poll is invalid, the poll doesn't get saved, but the
+    # response options are saved.
+    def delete_response_options_if_new_and_problem
+      if new? and (name.blank? or question.blank?)
+        response_options.each{|e| e.delete}
+      end
     end
   end
 end

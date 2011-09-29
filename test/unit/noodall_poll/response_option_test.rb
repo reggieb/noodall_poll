@@ -15,7 +15,7 @@ module NoodallPoll
 
     def test_join_to_poll
       @poll.response_options << @response_option
-      assert_equal(@poll, @response_option.poll)
+      assert_equal(@poll, @response_option.reload.poll)
     end
 
     def test_required_fields

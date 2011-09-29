@@ -6,6 +6,8 @@ module NoodallPoll
     def setup
       @poll = Factory(:poll)
       @response_option = Factory(:response_option)
+      @starting_number_of_polls = Poll.all.count
+      @starting_number_of_response_options = ResponseOption.all.count
     end
 
     def test_required_fields
@@ -66,11 +68,9 @@ module NoodallPoll
           {:position => 3, :text => 'monkey'}
         ]
       }
-      starting_number_of_polls = Poll.all.count
-      starting_number_of_response_options = ResponseOption.all.count
       poll = Poll.create(params)
-      assert_equal(starting_number_of_polls + 1, Poll.all.count, "One poll should be added to the database")
-      assert_equal(starting_number_of_response_options + 4, ResponseOption.all.count, "Three response options should be added to database")
+      assert_poll_added_to_database
+      assert_equal(@starting_number_of_response_options + 4, ResponseOption.all.count, "Three response options should be added to database")
       assert_equal(name, poll.name, "The most recent poll should have the name #{name}")
       assert_equal(%w{dog cat mouse monkey}, poll.response_options.collect{|o| o.text}, 'The three response options should be associated with the poll and in position order.')
     end
@@ -87,13 +87,22 @@ module NoodallPoll
           {:position => 3, :text => 'monkey'}
         ]
       }
-      starting_number_of_polls = Poll.all.count
-      starting_number_of_response_options = ResponseOption.all.count
       @poll.update_attributes(params)
-      assert_equal(starting_number_of_polls, Poll.all.count, "No polls should be added to the database")
-      assert_equal(starting_number_of_response_options + 4, ResponseOption.all.count, "Three response options should be added to database")
+      assert_poll_not_added_to_database
+      assert_equal(@starting_number_of_response_options + 4, ResponseOption.all.count, "Three response options should be added to database")
       assert_equal(name, @poll.name, "The poll should have the name #{name}")
       assert_equal(%w{dog cat mouse monkey}, @poll.response_options.collect{|o| o.text}, 'The three response options should be associated with the poll and in position order.')
+    end
+
+    def test_response_option_not_created_if_poll_not_created
+      poll = Poll.create(
+        :name => nil,
+        :question => 'will a response option be created?',
+        :response_options => [{:text => 'Should not'}]
+      )
+      assert_errors_detected_on(poll)
+      assert_poll_not_added_to_database
+      assert_response_option_not_added_to_database
     end
 
     private

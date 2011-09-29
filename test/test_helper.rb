@@ -18,6 +18,8 @@ end
 require_files_in_subdirectories('support', 'factories')
 
 class ActiveSupport::TestCase
+  require 'noodall_poll/custom_assertions'
+  include NoodallPoll::CustomAssertions
 
   def teardown
     drop_all_mongo_test_data

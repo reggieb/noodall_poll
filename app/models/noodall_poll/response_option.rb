@@ -10,6 +10,7 @@ module NoodallPoll
 
     validates_presence_of(:text)
 
+
     def result
       poll_responses.length
     end
@@ -17,5 +18,6 @@ module NoodallPoll
     def register_poll_response
       poll_responses << PollResponse.create
     end
+
   end
 end
