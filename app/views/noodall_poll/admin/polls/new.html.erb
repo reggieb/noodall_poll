@@ -36,7 +36,7 @@
 <%= javascript_tag do  %>
 jQuery(function() {
 
-  function putRemoteResponseBeforeLinkParent(remoteLinkId) {
+  function putResponseBeforeRemoteLinkParent(remoteLinkId) {
 
     function putContentAboveParent(childId, content) {
       $(childId).parent().before(content);
@@ -47,7 +47,7 @@ jQuery(function() {
     });
 
   };
-  putRemoteResponseBeforeLinkParent('#new_response_option_element');
+  putResponseBeforeRemoteLinkParent('#new_response_option_element');
 
 });
 <% end %>
