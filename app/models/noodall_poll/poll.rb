@@ -27,7 +27,7 @@ module NoodallPoll
       return result
     end
 
-    # I can't find a better way of doing this
+    # I can't find another way of doing this
     # Without it, if you create a poll together with response options
     # and the poll is invalid, the poll doesn't get saved, but the
     # response options are saved.

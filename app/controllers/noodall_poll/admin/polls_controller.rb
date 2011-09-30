@@ -35,7 +35,16 @@ module NoodallPoll
       def destroy
         get_poll
         @poll.destroy
-        redirect_to admin_polls_url
+        redirect_to admin_polls_path
+      end
+
+      def new_response_option_form_element
+        if request.xhr?
+          render :partial => 'new_response_option_form'
+        else
+          flash[:notice] = 'Please enable JavaScript for this site'
+          redirect_to admin_polls_path
+        end
       end
 
       private

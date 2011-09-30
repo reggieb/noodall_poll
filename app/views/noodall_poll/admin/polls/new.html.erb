@@ -21,6 +21,33 @@
 <%= render :partial => 'new_response_option_form' if @poll.new?  %>
 <%= fields_for_existing_reponse_options(@poll.response_options) %>
 <p>
+  <%= link_to(
+    "Add response option",
+    admin_new_response_option_element_path,
+    :remote => true,
+    :id => 'new_response_option_element') %>
+</p>
+
+<p>
   <%= poll_form.submit %>
 </p>
+<% end %>
+
+<%= javascript_tag do  %>
+jQuery(function() {
+
+  function putRemoteResponseBeforeLinkParent(remoteLinkId) {
+
+    function putContentAboveParent(childId, content) {
+      $(childId).parent().before(content);
+    };
+
+    $(remoteLinkId).bind('ajax:success', function(evt, data, status, xhr){
+      putContentAboveParent(remoteLinkId, xhr.responseText);
+    });
+
+  };
+  putRemoteResponseBeforeLinkParent('#new_response_option_element');
+
+});
 <% end %>
