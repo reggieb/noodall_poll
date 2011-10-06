@@ -1,11 +1,13 @@
 module NoodallPoll
   class ResponseOption
-    include MongoMapper::EmbeddedDocument
+    include MongoMapper::Document
     key :text, String
     key :position, Integer
 
+    timestamps!
+
     many :poll_responses, :class => NoodallPoll::PollResponse
-#    belongs_to :poll, :class_name => 'NoodallPoll::Poll'
+    belongs_to :poll, :class_name => 'NoodallPoll::Poll'
 
     validates_presence_of(:text)
 
