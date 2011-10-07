@@ -1,5 +1,4 @@
 NoodallPoll::Engine.routes.draw do
-  resources :polls
 
   namespace(:admin) do
     match(
@@ -8,5 +7,7 @@ NoodallPoll::Engine.routes.draw do
     )
     resources :polls
   end
+
+  resources :polls
 
 end

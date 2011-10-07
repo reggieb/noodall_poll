@@ -7,19 +7,12 @@ module NoodallPoll
       @poll = Factory(:poll)
     end
 
-    def test_index_when_no_polls_present
-      remove_polls_created_in_setup
-      noodall_poll_get :index
+    def test_show
+      get :show, :id => @poll.id
       assert_response :success
-      assert_equal([], assigns(:polls), "An empty array should be passed to the template when there are no polls")
-      assert_select('h2', :text => 'No polls found')
+      assert_equal(@poll, assigns(:poll), "Poll should be passed to template")
     end
 
-
-    private
-    def remove_polls_created_in_setup
-      teardown
-    end
 
   end
 end

@@ -1,8 +1,7 @@
 module NoodallPoll
   class PollsController < ApplicationController
-    def index
-      @polls = Poll.all
-
+    def show
+     # @poll = Poll.find(params[:id])
     end
     
   
