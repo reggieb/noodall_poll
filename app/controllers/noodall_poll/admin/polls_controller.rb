@@ -5,8 +5,12 @@ module NoodallPoll
       layout 'noodall_admin'
 
       def index
-        @polls = Poll.all
 
+        @polls = Poll.all
+        respond_to do |format|
+          format.html
+          format.css
+        end
       end
 
       def new
@@ -47,7 +51,7 @@ module NoodallPoll
         end
       end
 
-      private
+     private
       def get_poll
         @poll = Poll.find(params[:id])
       end

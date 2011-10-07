@@ -16,12 +16,15 @@ module NoodallPoll
 
       def fields_for_response_option(response_option)
         output = Array.new
+        form_elements = Array.new
         fields_for("response_options[#{response_option.id}]", response_option) do |response_option_fields|
-          output << response_option_fields.label(:text, 'Response option')
-          output << response_option_fields.text_field(:text)
-          output << response_option_fields.hidden_field(:position)
+          output << content_tag('span', 'Move', :class => 'move_handle')
+          form_elements << response_option_fields.label(:text, 'Response option')
+          form_elements << response_option_fields.text_field(:text)
+          form_elements << response_option_fields.hidden_field(:position)
+          output << content_tag('span', form_elements.join("\n").html_safe)
         end
-        content_tag('p', output.join("\n").html_safe)
+        content_tag('p', output.join("\n").html_safe, :class => 'response_option')
       end
 
 

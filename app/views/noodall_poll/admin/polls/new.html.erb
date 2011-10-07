@@ -1,3 +1,5 @@
+<% content_for :header, stylesheet_link_tag('/noodall_poll/admin/polls.css') %>
+
 <%= form_for([:admin, @poll]) do |poll_form| %>
 <p>
   <%= poll_form.label(:name) %><br />
@@ -18,8 +20,10 @@
   <%= poll_form.label(:thank_you_message) %><br />
   <%= poll_form.text_area(:thank_you_message, :rows => 4, :value => @poll.thank_you_message) %>
 </p>
-<%= render :partial => 'new_response_option_form' if @poll.new?  %>
-<%= fields_for_existing_reponse_options(@poll.response_options) %>
+<div class="response_options">
+  <%= render :partial => 'new_response_option_form' if @poll.new?  %>
+  <%= fields_for_existing_reponse_options(@poll.response_options) %>
+</div>
 <p>
   <%= link_to(
     "Add response option",
@@ -29,7 +33,7 @@
 </p>
 
 <p>
-  <%= poll_form.submit %>
+  <%= poll_form.submit(:on_submit => "updatePositions();") %>
 </p>
 <% end %>
 
@@ -49,5 +53,20 @@ jQuery(function() {
   };
   putResponseBeforeRemoteLinkParent('#new_response_option_element');
 
+  $( ".response_options" ).sortable({ containment: 'parent' });
+  $( ".response_options" ).disableSelection();
+
+  function setValuesToRelativePositionInDom(selector) {
+
+    $(selector).each(function(idx) {
+        $(this).val(idx);
+    });
+  };
+
+  function updatePositions() {
+    setValuesToRelativePositionInDom('.response_options input:hidden');
+  };
+
 });
 <% end %>
+<%= params.inspect %>
