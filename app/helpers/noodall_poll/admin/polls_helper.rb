@@ -21,7 +21,6 @@ module NoodallPoll
           output << content_tag('span', 'Move', :class => 'move_handle')
           form_elements << response_option_fields.label(:text, 'Response option')
           form_elements << response_option_fields.text_field(:text)
-          form_elements << response_option_fields.hidden_field(:position)
           output << content_tag('span', form_elements.join("\n").html_safe)
         end
         content_tag('p', output.join("\n").html_safe, :class => 'response_option')

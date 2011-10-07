@@ -8,7 +8,6 @@ module NoodallPoll
         @poll = Factory(:poll)
         @response_option = Factory(:response_option)
         @starting_number_of_polls = Poll.count
-        @starting_number_of_response_options = ResponseOption.count
       end
 
       def test_index
@@ -41,7 +40,6 @@ module NoodallPoll
           :response_options => new_response_option_params
         )
         assert_poll_added_to_database
-        assert_response_option_added_to_database
         assert_response :redirect
       end
 
@@ -52,7 +50,6 @@ module NoodallPoll
           :response_options => new_response_option_params
         )
         assert_poll_not_added_to_database
-        assert_response_option_not_added_to_database
         assert_response :success
         assert_errors_detected_on(assigns(:poll))
       end
