@@ -6,3 +6,10 @@
 <h3>Thank you message</h3>
 <p><%= @poll.thank_you_message %></p>
 
+<div id="display_poll"></div>
+
+<%= javascript_tag do %>
+
+  jQuery('#display_poll').load("<%=  poll_url -%>")
+
+<% end %>

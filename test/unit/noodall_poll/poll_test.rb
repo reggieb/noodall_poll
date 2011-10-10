@@ -54,23 +54,23 @@ module NoodallPoll
       assert_poll_added_to_database
       assert_equal(4, @poll.response_options.length, "Response options should be added")
       assert_equal(name, @poll.name, "The most recent poll should have the name #{name}")
-      assert_equal(%w{dog mouse cat monkey}, @poll.response_options.collect{|o| o.text}, 'The three response options should be associated with the poll and in position order.')
+      assert_equal(%w{dog mouse cat monkey}, @poll.response_options.collect{|o| o.text}, 'The response options should be associated with the poll and in order.')
     end
 
-    def test_update_attribute_with_response_options
+    def test_update_attribute_with_response_options_reversed
       test_creation_of_poll_with_response_options
       set_starting_numbers
       name =  'test poll update'
       params = {
         :name => name,
         :question => 'What is you favourite animal',
-        :response_options => @poll.response_options.collect{|r| {:id => r.id, :text => r.text}}
+        :response_options => @poll.response_options.reverse.collect{|r| {:id => r.id, :text => r.text}}
       }
       @poll.update_attributes(params)
       assert_poll_not_added_to_database
       assert_equal(4, @poll.response_options.length, "Response options should still be 4")
       assert_equal(name, @poll.name, "The poll should have the name #{name}")
-      assert_equal(%w{dog mouse cat monkey}, @poll.response_options.collect{|o| o.text}, 'The three response options should be associated with the poll and in position order.')
+      assert_equal(%w{monkey cat mouse dog}, @poll.response_options.collect{|o| o.text}, 'The response options should be associated with the poll and in order.')
     end
 
     private
