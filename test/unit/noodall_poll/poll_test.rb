@@ -35,7 +35,7 @@ module NoodallPoll
     def test_join_to_response_option
       @poll.response_options << @response_option
       @poll.save
-      assert_equal(@response_option, @poll.reload.response_options.first)
+      assert_equal(@response_option, @poll.reload.response_options.last)
     end
 
     def test_creation_of_poll_with_response_options
@@ -71,6 +71,11 @@ module NoodallPoll
       assert_equal(4, @poll.response_options.length, "Response options should still be 4")
       assert_equal(name, @poll.name, "The poll should have the name #{name}")
       assert_equal(%w{monkey cat mouse dog}, @poll.response_options.collect{|o| o.text}, 'The response options should be associated with the poll and in order.')
+    end
+
+    def test_submitted_label
+      expected_label = "submitted_#{@poll.id}".to_sym
+      assert_equal(expected_label, @poll.submitted_label, "Submitted label sould be '#{expected_label}'")
     end
 
     private

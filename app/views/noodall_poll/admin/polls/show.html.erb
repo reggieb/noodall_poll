@@ -1,3 +1,5 @@
+<% content_for :header, stylesheet_link_tag('/noodall_poll/polls.css', '/noodall_poll/admin/polls.css') %>
+
 <h1><%= @poll.name %></h1>
 <h2>Question</h2>
 <p><%= @poll.question %></p>
@@ -6,10 +8,27 @@
 <h3>Thank you message</h3>
 <p><%= @poll.thank_you_message %></p>
 
-<div id="display_poll"></div>
+<h2>Poll output</h2>
+<div class="poll_output">
+  <h3>The form</h3>
+  <div id="display_form"></div>
+</div>
+<div class="poll_output">
+  <h3>The current results</h3>
+  <div id="display_poll"></div>
+</div>
 
 <%= javascript_tag do %>
 
-  jQuery('#display_poll').load("<%=  poll_url -%>")
+jQuery(function () {
 
+  
+
+  jQuery('#display_poll').load("<%= poll_url(@poll) + '?show_poll_form=no' -%>");
+  jQuery('#display_form').load("<%= poll_url(@poll) + '?show_poll_form=yes' -%>");
+  jQuery('#display_form').click(function(event) {
+    event.preventDefault();
+  });
+
+});
 <% end %>

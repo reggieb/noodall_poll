@@ -34,6 +34,7 @@ module NoodallPoll
 
       def show
         get_poll
+        @show_poll_result = true
       end
 
       def destroy

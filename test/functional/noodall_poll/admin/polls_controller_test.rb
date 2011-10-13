@@ -83,6 +83,7 @@ module NoodallPoll
         assert_response :success
         assert_poll_passed_to_template
         assert_select('h1', :text => @poll.name)
+        assert(assigns('show_poll_result'), "@show_poll_result should be passed to veiw as true")
       end
 
       def test_destroy

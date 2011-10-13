@@ -1,7 +1,9 @@
-<p><%= @poll.question %></p>
-<ul>
-<% for response_option in @poll.response_options %>
-  <%= content_tag('li', response_option.text) %>
-<% end %>
-</ul>
-
+<div class="poll_response">
+  <p><%= @poll.question %></p>
+  <% for result in @poll.results %>
+    <% for field in %w{text count} %>
+      <%= content_tag('span', result[field.to_sym], :class => field) %>
+    <% end %>
+    <br />
+  <% end %>
+</div>

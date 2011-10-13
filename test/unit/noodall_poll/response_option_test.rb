@@ -14,13 +14,10 @@ module NoodallPoll
       assert(@poll.reload.response_options.include?(@response_option))
     end
 
-#    def test_required_fields
-#      response_option = ResponseOption.create
-#      required = [:text]
-#      required.each do |field|
-#        assert(!response_option.errors[field].empty?, "Errors should be present against '#{field}'")
-#      end
-#    end
+    def test_poll
+      test_join_to_poll
+      assert_equal(@poll, @response_option.poll, "poll should return parent document")
+    end
 
   end
 end

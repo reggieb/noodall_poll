@@ -1,0 +1,11 @@
+<div class="poll_response">
+  <p><%= @poll.question %></p>
+  <%= form_for(@poll) do |form| %>
+    <ul>
+    <% for response_option in @poll.response_options %>
+      <%= content_tag('li', radio_button_tag(:poll_response, response_option.text) + response_option.text) %>
+    <% end %>
+    </ul>
+    <%= submit_tag(@poll.button_label) %>
+  <% end %>
+</div>
