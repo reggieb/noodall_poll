@@ -1,7 +1,9 @@
 <div class="poll_response">
   <p><%= @poll.question %></p>
   <% for result in @poll.results %>
-    <% for field in %w{text count} %>
+    <span class="poll_result_block" style="width:<%= (result[:bar_size] * 40).to_i %>px;"></span>
+    <span style="width:<%= 40 - (result[:bar_size] * 40).to_i %>px;"></span>
+    <% for field in %w{count text} %>
       <%= content_tag('span', result[field.to_sym], :class => field) %>
     <% end %>
     <br />
