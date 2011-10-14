@@ -4,6 +4,13 @@ Rails.application.routes.draw do
 
   mount NoodallPoll::Engine => "/noodall_poll"
 
+  namespace(:noodall_poll) do
+    namespace(:admin) do
+      resources :polls
+    end
+  end
+
+
 end
 
 require 'noodall/routes'
