@@ -13,7 +13,7 @@
 <%= javascript_tag do %>
 function submitToRemote(form, remote_url, output) {
 
-  jQuery(form).submit( function() {
+  jQuery(form).submit( function(event) {
     event.preventDefault();
     $.ajax({
         url: remote_url,
