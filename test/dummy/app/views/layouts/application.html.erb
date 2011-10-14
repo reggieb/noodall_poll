@@ -2,9 +2,14 @@
 <html>
 <head>
   <title>Dummy</title>
-  <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
+  <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+  <script type="text/javascript">
+    google.load("jquery", "1.4.2");
+  </script>
   <%= csrf_meta_tags %>
+  <%= yield :head %>
 </head>
 <body>
 

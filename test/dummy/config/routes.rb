@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root :to => 'demo#index'
+
   mount NoodallPoll::Engine => "/noodall_poll"
 
 end

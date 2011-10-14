@@ -1,11 +1,33 @@
-<div class="poll_response">
-  <p><%= @poll.question %></p>
-  <%= form_for(@poll) do |form| %>
+<div class="poll_response" id="poll_reponse_<%= @poll.id -%>">
+  <%= form_for(@poll, :remote => true) do |form| %>
+    <p><%= @poll.question %></p>
     <ul>
     <% for response_option in @poll.response_options %>
       <%= content_tag('li', radio_button_tag(:poll_response, response_option.text) + response_option.text) %>
     <% end %>
     </ul>
-    <%= submit_tag(@poll.button_label) %>
+    <%= submit_tag(@poll.button_label, :id => 'poll_response_button') %>
   <% end %>
 </div>
+
+<%= javascript_tag do %>
+function submitToRemote(form, remote_url, output) {
+
+  jQuery(form).submit( function() {
+    event.preventDefault();
+    $.ajax({
+        url: remote_url,
+        type: 'post',
+        data: $(form).serialize(),
+        success: function(data) {
+                   $(output).replaceWith(data);
+                 }
+    });
+  });
+};
+
+submitToRemote(
+  '#edit_noodall_poll_poll_<%= @poll.id -%>',
+  '/noodall_poll/polls/<%= @poll.id -%>',
+  '#poll_reponse_<%= @poll.id -%>');
+<% end %>

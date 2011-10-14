@@ -41,7 +41,9 @@ module NoodallPoll
     private
     def add_bar_sizes(output)
       max_count = output.inject(0){|max, entry| entry[:count].to_i > max ? entry[:count].to_i : max}
-      output.each{|entry| entry[:bar_size] = entry[:count].to_f / max_count.to_f}
+      output.each do |entry|
+        entry[:bar_size] = max_count > 0 ? entry[:count].to_f / max_count.to_f : 0
+      end
     end
       
   end
