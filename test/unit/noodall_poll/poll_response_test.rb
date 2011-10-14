@@ -23,9 +23,9 @@ module NoodallPoll
     def test_poll_result
       test_responses_for_poll
       expected = [
-        {:text => @response_option.text, :count => 6},
-        {:text => @response_two.text, :count => 2},
-        {:text => @response_three.text, :count => 8}
+        {:text => @response_option.text, :count => 6, :bar_size => 0.75},
+        {:text => @response_two.text, :count => 2, :bar_size => 0.25},
+        {:text => @response_three.text, :count => 8, :bar_size => 1.0}
       ]
       assert_equal(expected, @poll.reload.results)
     end
