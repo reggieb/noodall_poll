@@ -26,7 +26,6 @@ module NoodallPoll
         content_tag('p', output.join("\n").html_safe, :class => 'response_option')
       end
 
-
     end
   end
 end
