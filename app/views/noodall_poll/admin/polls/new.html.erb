@@ -12,22 +12,22 @@
 <%= content_tag('p', poll_form.error_messages) %>
 <p>
   <%= poll_form.label(:name) %><br />
-  <%= poll_form.text_field(:name) %>
+  <span class="input-wrap"><%= poll_form.text_field(:name) %></span>
 </p>
 
 <p>
   <%= poll_form.label(:question, "The poll question (e.g. 'What is your favourite colour?')") %><br />
-  <%= poll_form.text_area(:question, :rows => 4) %>
+  <span class="input-wrap"><%= poll_form.text_area(:question, :rows => 4) %></span>
 </p>
 
 <p>
   <%= poll_form.label(:button_label) %><br />
-  <%= poll_form.text_field(:button_label, :value => @poll.button_label) %>
+  <span class="input-wrap"><%= poll_form.text_field(:button_label, :value => @poll.button_label) %></span>
 </p>
 
 <p>
   <%= poll_form.label(:thank_you_message) %><br />
-  <%= poll_form.text_area(:thank_you_message, :rows => 4, :value => @poll.thank_you_message) %>
+  <span class="input-wrap"><%= poll_form.text_area(:thank_you_message, :rows => 4, :value => @poll.thank_you_message) %></span>
 </p>
 <div class="response_options">
   <%= render :partial => 'new_response_option_form' if @poll.new?  %>
@@ -41,9 +41,10 @@
     :id => 'new_response_option_element') %>
 </p>
 
-<p>
-  <%= poll_form.submit %>
-</p>
+<div class="fixed-form">
+  <%= poll_form.submit :class => (@poll.new_record? ? 'create' : 'update') %>
+  <%= link_to 'Cancel', noodall_poll_admin_polls_path, :class => 'cancel'  %>
+</div>
 <% end %>
 
 <%= javascript_tag do  %>
