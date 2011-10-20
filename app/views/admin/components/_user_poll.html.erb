@@ -1,0 +1,11 @@
+<%= fields_for :node do |f| %>
+<%=   f.fields_for slot_name, component do |f| %>
+      <%= f.hidden_field :_type %>
+      <%= error_messages_for :object => component %>
+      <p>
+        <%= f.label :poll_id, 'Poll' %><br />
+        <span class="input-wrap"><%= f.select :poll_id, options_for_select(component.class.poll_options, component.poll_id.to_s) %></span>
+      </p>
+
+<%   end
+   end %>
