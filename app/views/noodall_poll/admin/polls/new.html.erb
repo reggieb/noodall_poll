@@ -49,21 +49,25 @@
 <%= javascript_tag do  %>
 jQuery(function() {
 
-  function putResponseBeforeRemoteLinkParent(remoteLinkId) {
+  function makeResponseOptionsSortable() {
+    $( ".response_options" ).sortable({ containment: 'parent' });
+    $( ".response_options" ).disableSelection();
+  };
 
-    function putContentAboveParent(childId, content) {
-      $(childId).parent().before(content);
+  makeResponseOptionsSortable();
+
+  function positionRemoteContent(remoteLinkId, container) {
+
+    function putContentInContainer(content) {
+      $(container).append(content);
     };
 
     $(remoteLinkId).bind('ajax:success', function(evt, data, status, xhr){
-      putContentAboveParent(remoteLinkId, xhr.responseText);
+      putContentInContainer(xhr.responseText);
     });
 
   };
-  putResponseBeforeRemoteLinkParent('#new_response_option_element');
-
-  $( ".response_options" ).sortable({ containment: 'parent' });
-  $( ".response_options" ).disableSelection();
+  positionRemoteContent('#new_response_option_element', '.response_options');
 
 });
 <% end %>
