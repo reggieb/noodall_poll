@@ -26,7 +26,10 @@ module NoodallPoll
       if params[:poll_response]
         PollResponse.create(:poll_id => @poll.id, :text => params[:poll_response])
         session[@poll.submitted_label] = Time.now
-        cookies[@poll.submitted_label] = session[@poll.submitted_label]
+        cookies[@poll.submitted_label] = {
+          :value => session[@poll.submitted_label],
+          :expires => 1.year.from_now
+        }
         flash[:notice] = @poll.thank_you_message
       end
       render :partial => 'show'
