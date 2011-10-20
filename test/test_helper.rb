@@ -31,19 +31,19 @@ class ActiveSupport::TestCase
     end
   end
 
-  def noodall_poll_get(action, parameters = {}, *args)
-    noodall_poll_request(:get, action, parameters, *args)
-  end
-
-  def noodall_poll_post(action, parameters = {}, *args)
-    noodall_poll_request(:post, action, parameters, *args)
-  end
-
-  private
-  def noodall_poll_request(type, action, parameters, *args)
-    parameters.merge!(:use_route => :noodall_poll)
-    send(type, action, parameters, *args)
-  end
+#  def noodall_poll_get(action, parameters = {}, *args)
+#    noodall_poll_request(:get, action, parameters, *args)
+#  end
+#
+#  def noodall_poll_post(action, parameters = {}, *args)
+#    noodall_poll_request(:post, action, parameters, *args)
+#  end
+#
+#  private
+#  def noodall_poll_request(type, action, parameters, *args)
+##    parameters.merge!(:use_route => :noodall_poll)
+#    send(type, action, parameters, *args)
+#  end
 
 end
 

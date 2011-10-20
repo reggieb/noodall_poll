@@ -1,6 +1,15 @@
 <% content_for :header, stylesheet_link_tag('/noodall_poll/admin/polls.css') %>
 
-<%= form_for([:admin, @poll]) do |poll_form| %>
+<%= form_for(
+  @poll,
+  :url => {
+    :controller => 'noodall_poll/admin/polls',
+    :action => %w{new create}.include?(controller.action_name) ? 'create' : 'update',
+    :id => @poll
+  }
+) do |poll_form| %>
+
+<%= content_tag('p', poll_form.error_messages) %>
 <p>
   <%= poll_form.label(:name) %><br />
   <%= poll_form.text_field(:name) %>
@@ -27,13 +36,13 @@
 <p>
   <%= link_to(
     "Add response option",
-    admin_new_response_option_element_path,
+    noodall_poll_admin_new_response_option_element_path,
     :remote => true,
     :id => 'new_response_option_element') %>
 </p>
 
 <p>
-  <%= poll_form.submit(:on_submit => "updatePositions();") %>
+  <%= poll_form.submit %>
 </p>
 <% end %>
 
@@ -55,17 +64,6 @@ jQuery(function() {
 
   $( ".response_options" ).sortable({ containment: 'parent' });
   $( ".response_options" ).disableSelection();
-
-  function setValuesToRelativePositionInDom(selector) {
-
-    $(selector).each(function(idx) {
-        $(this).val(idx);
-    });
-  };
-
-  function updatePositions() {
-    setValuesToRelativePositionInDom('.response_options input:hidden');
-  };
 
 });
 <% end %>

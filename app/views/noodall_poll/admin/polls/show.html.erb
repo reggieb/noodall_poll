@@ -24,8 +24,8 @@ jQuery(function () {
 
   
 
-  jQuery('#display_poll').load("<%= poll_url(@poll) + '?show_poll_form=no' -%>");
-  jQuery('#display_form').load("<%= poll_url(@poll) + '?show_poll_form=yes' -%>");
+  jQuery('#display_poll').load("<%= noodall_poll_poll_url(@poll) + '?show_poll_form=no' -%>");
+  jQuery('#display_form').load("<%= noodall_poll_poll_url(@poll) + '?show_poll_form=yes' -%>");
   jQuery('#display_form').click(function(event) {
     event.preventDefault();
   });

@@ -1,6 +1,6 @@
 module NoodallPoll
   module Admin
-    class PollsController < ApplicationController
+    class PollsController < Noodall::Admin::BaseController
 
       layout 'noodall_admin'
 
@@ -40,7 +40,7 @@ module NoodallPoll
       def destroy
         get_poll
         @poll.destroy
-        redirect_to admin_polls_path
+        redirect_to noodall_poll_admin_polls_path
       end
 
       def new_response_option_form_element
@@ -48,7 +48,7 @@ module NoodallPoll
           render :partial => 'new_response_option_form'
         else
           flash[:notice] = 'Please enable JavaScript for this site'
-          redirect_to admin_polls_path
+          redirect_to noodall_poll_admin_polls_path
         end
       end
 
@@ -61,7 +61,7 @@ module NoodallPoll
 
         @poll.attributes = processed_poll_params
         if @poll.save
-          redirect_to edit_admin_poll_path(@poll)
+          redirect_to noodall_poll_admin_polls_path
         else
           render :action => "new"
         end
@@ -70,9 +70,9 @@ module NoodallPoll
       def processed_poll_params
         if params[:response_options]
           add_ids_to_response_options_param_values
-          params[:poll][:response_options] = params[:response_options].values
+          params[:noodall_poll_poll][:response_options] = params[:response_options].values
         end
-        params[:poll]
+        params[:noodall_poll_poll]
       end
 
       def add_ids_to_response_options_param_values

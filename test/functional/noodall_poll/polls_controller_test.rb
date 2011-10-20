@@ -9,14 +9,14 @@ module NoodallPoll
     end
 
     def test_show
-      noodall_poll_get :show, :id => @poll.id
+      get :show, :id => @poll.id
       assert_response :success
       assert_equal(@poll, assigns(:poll), "Poll should be passed to template")
     end
 
     def test_update
       starting_number_of_poll_responses = PollResponse.count
-      noodall_poll_post :update, :id => @poll.id, :poll_response => @response_option.text
+      post :update, :id => @poll.id, :poll_response => @response_option.text
       assert_equal(starting_number_of_poll_responses + 1, PollResponse.count, '1 Poll response should have been added to database')
       poll_response = PollResponse.last
       assert_equal(poll_response.poll_id, @poll.id, "poll_id should match poll")

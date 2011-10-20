@@ -11,7 +11,7 @@ module NoodallPoll
       end
 
       def test_index
-        noodall_poll_get :index
+        get :index
         assert_response :success
         assert_equal([@poll], assigns(:polls), "@poll should be passed to the template")
         assert_select('td', :text => @poll.name)
@@ -20,7 +20,7 @@ module NoodallPoll
 
       def test_index_when_no_polls_present
         remove_polls_created_in_setup
-        noodall_poll_get :index
+        get :index
         assert_response :success
         assert_equal([], assigns(:polls), "An empty array should be passed to the template when there are no polls")
         assert_select('h2', :text => 'No polls found')
@@ -28,15 +28,15 @@ module NoodallPoll
       end
 
       def test_new
-        noodall_poll_get :new
+        get :new
         assert_response :success
         assert_empty_poll_passed_to_template
       end
 
       def test_create
-        noodall_poll_post(
+        post(
           :create,
-          :poll => poll_params,
+          :noodall_poll_poll => poll_params,
           :response_options => new_response_option_params
         )
         assert_poll_added_to_database
@@ -44,9 +44,9 @@ module NoodallPoll
       end
 
       def test_failure_to_create
-        noodall_poll_post(
+        post(
           :create,
-          :poll => poll_params.merge(:name => nil),
+          :noodall_poll_poll => poll_params.merge(:name => nil),
           :response_options => new_response_option_params
         )
         assert_poll_not_added_to_database
@@ -55,7 +55,7 @@ module NoodallPoll
       end
 
       def test_edit
-        noodall_poll_get :edit, :id => @poll
+        get :edit, :id => @poll
         assert_response :success
         assert_poll_passed_to_template
       end
@@ -63,7 +63,7 @@ module NoodallPoll
       def test_update
         name = "New name"
         @poll.name = name
-        noodall_poll_post :update, :id => @poll, :poll => @poll.attributes
+        post :update, :id => @poll, :noodall_poll_poll => @poll.attributes
         assert_response :redirect
         assert_poll_passed_to_template
         assert_equal(name, assigns(:poll).name)
@@ -71,7 +71,7 @@ module NoodallPoll
       end
 
       def test_failure_to_update
-        noodall_poll_post :update, :id => @poll, :poll => @poll.attributes.merge(:name => "")
+        post :update, :id => @poll, :noodall_poll_poll => @poll.attributes.merge(:name => "")
         assert_response :success
         assert_poll_passed_to_template
         assert_errors_detected_on(assigns(:poll))
@@ -79,7 +79,7 @@ module NoodallPoll
       end
 
       def test_show
-        noodall_poll_get :show, :id => @poll
+        get :show, :id => @poll
         assert_response :success
         assert_poll_passed_to_template
         assert_select('h1', :text => @poll.name)
@@ -87,7 +87,7 @@ module NoodallPoll
       end
 
       def test_destroy
-        noodall_poll_post :destroy, :id => @poll
+        post :destroy, :id => @poll
         assert_poll_deleted_from_database
         assert_response :redirect
       end

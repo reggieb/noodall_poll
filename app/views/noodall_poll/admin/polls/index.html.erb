@@ -1,6 +1,6 @@
 <h1>Manage Polls</h1>
 
-<%= link_to('Create new poll', new_admin_poll_url) %>
+<%= link_to('Create new poll', new_noodall_poll_admin_poll_url) %>
 
 <% unless @polls.blank? %>
 <table>
@@ -15,9 +15,9 @@
     <td><%= poll.name %></td>
     <td><%= poll.question %></td>
     <td><%= poll.response_options ? poll.response_options.length : 0 %></td>
-    <td><%= link_to('Show', admin_poll_path(poll)) %></td>
-    <td><%= link_to('Edit', edit_admin_poll_path(poll)) %></td>
-    <td><%= link_to('Delete', admin_poll_path(poll), :confirm => 'Are you sure?', :method => :delete) %></td>
+    <td><%= link_to('Show', noodall_poll_admin_poll_path(poll)) %></td>
+    <td><%= link_to('Edit', edit_noodall_poll_admin_poll_path(poll)) %></td>
+    <td><%= link_to('Delete', noodall_poll_admin_poll_path(poll), :confirm => 'Are you sure?', :method => :delete) %></td>
   </tr>
 <%   end %>
 </table>
