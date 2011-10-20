@@ -73,6 +73,22 @@ module NoodallPoll
       assert_equal(%w{monkey cat mouse dog}, @poll.response_options.collect{|o| o.text}, 'The response options should be associated with the poll and in order.')
     end
 
+    def test_creation_of_poll_with_blank_response_option
+      name =  'test empty response option'
+      params = {
+        :name => name,
+        :question => 'What is you favourite animal',
+        :response_options => [
+          {:text => 'dog'},
+          {:text => ''},
+          {:text => nil}
+        ]
+      }
+      @poll = Poll.create(params)
+      assert_poll_added_to_database
+      assert_equal(1, @poll.response_options.length, "Only one response options should be added. #{@poll.response_options.inspect}")
+    end
+
     def test_submitted_label
       expected_label = "submitted_#{@poll.id}".to_sym
       assert_equal(expected_label, @poll.submitted_label, "Submitted label sould be '#{expected_label}'")

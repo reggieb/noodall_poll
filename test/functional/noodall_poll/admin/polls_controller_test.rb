@@ -54,6 +54,21 @@ module NoodallPoll
         assert_errors_detected_on(assigns(:poll))
       end
 
+      def test_create_with_empty_response_option
+        response_options = new_response_option_params
+        response_options.merge!(new_response_option_params(:text => nil))
+        post(
+          :create,
+          :noodall_poll_poll => poll_params,
+          :response_options => response_options
+        )
+        assert_poll_added_to_database
+        assert_response :redirect
+        poll = Poll.all.last
+        poll.response_options.each{|o| puts "text is #{o.text.class}"}
+        assert_equal(1, poll.response_options.length, "Only one response option should be saved. #{poll.response_options.inspect}")
+      end
+
       def test_edit
         get :edit, :id => @poll
         assert_response :success
@@ -122,9 +137,9 @@ module NoodallPoll
         }
       end
 
-      def new_response_option_params
+      def new_response_option_params(mods = {})
         {
-          ResponseOption.new.id => {:text => Faker::Lorem.sentence}
+          ResponseOption.new.id => {:text => Faker::Lorem.sentence}.merge(mods)
         }
       end
 

@@ -11,6 +11,8 @@ module NoodallPoll
 
     validates_presence_of(:name, :question)
 
+    before_save :remove_empty_response_options
+
     def button_label
       super.blank? ? 'Submit' : super
     end
@@ -44,6 +46,10 @@ module NoodallPoll
       output.each do |entry|
         entry[:bar_size] = max_count > 0 ? entry[:count].to_f / max_count.to_f : 0
       end
+    end
+
+    def remove_empty_response_options
+      response_options.delete_if{|response_option| !response_option.text or response_option.text.blank?}
     end
       
   end
