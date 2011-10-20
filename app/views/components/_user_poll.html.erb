@@ -1,5 +1,6 @@
-<div id="poll">
-  <div id="display_poll"></div>
+<% div_id = "display_poll_#{component.poll_id}" %>
+<div class="poll">
+  <div id="<%= div_id %>"</div>
 </div>
 
-<%= show_poll_at(component.poll_id, '#display_poll') %>
+<%= show_poll_at(component.poll_id, "##{div_id}") %>
