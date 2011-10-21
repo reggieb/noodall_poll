@@ -65,7 +65,6 @@ module NoodallPoll
         assert_poll_added_to_database
         assert_response :redirect
         poll = Poll.all.last
-        poll.response_options.each{|o| puts "text is #{o.text.class}"}
         assert_equal(1, poll.response_options.length, "Only one response option should be saved. #{poll.response_options.inspect}")
       end
 

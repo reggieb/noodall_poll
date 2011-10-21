@@ -3,6 +3,7 @@ module NoodallPoll
     include MongoMapper::Document
     key :name, String
     key :question, String
+    key :summary, String
     key :button_label, String
     key :thank_you_message, String
     timestamps!
@@ -23,6 +24,10 @@ module NoodallPoll
 
     def submitted_label
       @submitted_label ||= "submitted_#{self.id}".to_sym
+    end
+
+    def summary
+      super.blank? ? question : super
     end
 
     def results

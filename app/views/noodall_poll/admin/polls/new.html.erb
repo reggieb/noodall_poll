@@ -21,6 +21,11 @@
 </p>
 
 <p>
+  <%= poll_form.label(:summary, "The text that appears after submission (text will match question if no summary given)") %><br />
+  <span class="input-wrap"><%= poll_form.text_area(:summary, :rows => 4) %></span>
+</p>
+
+<p>
   <%= poll_form.label(:button_label) %><br />
   <span class="input-wrap"><%= poll_form.text_field(:button_label, :value => @poll.button_label) %></span>
 </p>

@@ -94,6 +94,22 @@ module NoodallPoll
       assert_equal(expected_label, @poll.submitted_label, "Submitted label sould be '#{expected_label}'")
     end
 
+    def test_summary_when_nil
+      @poll.summary = nil
+      assert_equal(@poll.question, @poll.summary, "Summary should return question when summary absent")
+    end
+
+    def test_summary_when_empty_string
+      @poll.summary = " "
+      assert_equal(@poll.question, @poll.summary, "Summary should return question when summary blank")
+    end
+
+    def test_summary
+      summary = "Summary"
+      @poll.summary = summary
+      assert_equal(summary, @poll.summary, "Summary should return value stored in database when present")
+    end
+
     private
     def add_second_response_option
       @second_response_option = ResponseOption.create(:text => 'blue')

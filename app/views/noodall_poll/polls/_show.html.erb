@@ -1,5 +1,5 @@
 <div class="poll_response">
-  <p><%= @poll.question %></p>
+  <p><%= @poll.summary %></p>
   <% for result in @poll.results %>
     <span class="poll_result_block" style="width:<%= (result[:bar_size] * 40).to_i %>px;"></span>
     <span style="width:<%= 40 - (result[:bar_size] * 40).to_i %>px;"></span>
